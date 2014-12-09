@@ -8,10 +8,10 @@
   "homepage": "http://github.com/joshuafcole/async-node-events",
   "author": "Joshua Cole <joshuafcole@gmail.com>, David Ellis",
   "version": "0.0.6",
-  "bugs": "https://github.com/joshuafcole/async-node-events/issues",
+  "bugs": "https://github.com/digitalbazaar/async-node-events/issues",
   "repository": {
     "type": "git",
-    "url": "git://github.com:joshuafcole/async-node-events.git"
+    "url": "git://github.com:digitalbazaar/async-node-events.git"
   },
   "main": "./lib/async-node-events",
   "dependencies": {
@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "chai": "^1.9.0",
+    "jshint": "~2.5.10",
     "mocha": "^1.18.0",
     "gulp": "^3.6.0",
     "gulp-mocha": "^0.4.1",
@@ -30,8 +31,6 @@
     "node": ">=0.6"
   },
   "scripts": {
-    "jshint": "./test/jshint.sh",
-    "realpublish": "./prepublish.sh && npm publish",
-    "test": "npm run jshint && nodeunit ./test/test-node.js"
+    "test": "gulp test"
   }
 }
