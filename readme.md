@@ -2,8 +2,17 @@
 
 An EventEmitter replacement that allows both asynchronous and synchronous emissions and handlers.
 This is entirely based off of and almost entirely written by @dfellis in his excellent
-[async-cancelable-events](https://github.com/dfellis/async-cancelable-events) module. This is purely
-a semantic change with some minor code revision. Even this README is primarily written by @dfellis.
+[async-cancelable-events](https://github.com/dfellis/async-cancelable-events) module. Even this
+README is primarily written by @dfellis.
+
+This version uses the idiomatic node callback continuation style. Namely, once an asynchronous
+function has completed, it calls a callback, passing the first parameter as an error
+(or `null`) and then optional parameters may follow. Passing an error back from a listener
+that executed asynchronously will terminate the listener chain (subsequent listeners will not
+receive the emitted event and any callback for the event emitter will receive the error). Events
+may also be canceled by passing `false` as the second parameter to a asynchronous listener's
+callback -- which is the analog to returning false from a synchronous listener. Both of these
+approaches will stop further event emission (to other listeners), but not raise an error.
 
 All credit goes to @dfellis.
 
@@ -37,7 +46,8 @@ The primary differences between the EventEmitter and async-node-events are:
 4. The various method calls are chainable, so ``foo.on('bar', func1).on('baz', func2)`` is valid.
 
 The primary difference between async-cancelable-events and async-node-events is:
-1. The parameters of asynchronous callbacks use the node idiom of `callback(err:Error|Null, result:Any)` rather than `callback(continue:Boolean)`.
+
+1. The parameters of asynchronous callbacks use the node idiom of `callback(err:Error|Null, result:Any)` rather than `callback(continue:Boolean)`. If `result:Any` is `false` then it will cancel further event emission to other listeners.
 
 ## License (MIT)
 
