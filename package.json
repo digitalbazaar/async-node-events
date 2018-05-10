@@ -23,7 +23,7 @@
   "bugs": "https://github.com/digitalbazaar/async-node-events/issues",
   "repository": {
     "type": "git",
-    "url": "git://github.com:digitalbazaar/async-node-events.git"
+    "url": "https://github.com/digitalbazaar/async-node-events"
   },
   "main": "./lib/async-node-events",
   "dependencies": {
