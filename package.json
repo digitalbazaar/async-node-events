@@ -8,14 +8,17 @@
   ],
   "homepage": "http://github.com/joshuafcole/async-node-events",
   "author": "David Ellis",
-  "contributors": [{
-    "name": "Joshua Cole",
-    "email": "joshuafcole@gmail.com"
-  }, {
-    "name": "Digital Bazaar, Inc.",
-    "email": "support@digitalbazaar.com",
-    "url": "http://digitalbazaar.com/"
-  }],
+  "contributors": [
+    {
+      "name": "Joshua Cole",
+      "email": "joshuafcole@gmail.com"
+    },
+    {
+      "name": "Digital Bazaar, Inc.",
+      "email": "support@digitalbazaar.com",
+      "url": "http://digitalbazaar.com/"
+    }
+  ],
   "license": "MIT",
   "bugs": "https://github.com/digitalbazaar/async-node-events/issues",
   "repository": {
@@ -43,4 +46,3 @@
     "test": "gulp test"
   }
 }
-
