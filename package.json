@@ -31,18 +31,20 @@
   },
   "devDependencies": {
     "chai": "^1.9.0",
-    "jshint": "~2.5.10",
-    "mocha": "^1.18.0",
+    "docco": "*",
+    "eslint": "^6.5.1",
+    "eslint-config-digitalbazaar": "^2.0.1",
     "gulp": "^3.6.0",
-    "gulp-mocha": "^0.4.1",
     "gulp-coverage": "^0.1.20",
     "gulp-coverage-reporter": "git+ssh://git@github.com:joshuafcole/gulp-coverage-reporter.git#0.0.1",
-    "docco": "*"
+    "gulp-mocha": "^0.4.1",
+    "mocha": "^1.18.0"
   },
   "engines": {
     "node": ">=0.6"
   },
   "scripts": {
+    "lint": "eslint 'lib/*.js' 'test/*.js'",
     "test": "gulp test"
   }
 }
