@@ -1,6 +1,5 @@
-/*jshint expr: true*/
-var expect = require('chai').expect;
-var EventEmitter = require('../lib/async-node-events');
+const expect = require('chai').expect;
+const EventEmitter = require('../lib/async-node-events');
 
 describe('EventEmitter', function() {
   describe('#constructor', function() {
@@ -10,20 +9,21 @@ describe('EventEmitter', function() {
   });
 
   describe('#emit', function() {
-    it('should not error when emitting a nonexistent event async', function(done) {
-      var emitter = new EventEmitter();
+    it('should not error when emitting a nonexistent event async', function(
+      done) {
+      const emitter = new EventEmitter();
       emitter.emitAsync('doesNotExist', done);
     });
 
     it('should not error when emitting a nonexistent event sync', function() {
-      var emitter = new EventEmitter();
+      const emitter = new EventEmitter();
       emitter.emitSync('doesNotExist');
       emitter.emit('doesNotExist');
     });
 
     it('should call once listeners and remove them', function(done) {
-      var emitter = new EventEmitter();
-      var emitted = false;
+      const emitter = new EventEmitter();
+      let emitted = false;
       emitter._oneTimeListeners = {test: [function() {
         emitted = true;
       }]};
@@ -36,8 +36,8 @@ describe('EventEmitter', function() {
     });
 
     it('should call regular listeners without removing them', function(done) {
-      var emitter = new EventEmitter();
-      var emitted = false;
+      const emitter = new EventEmitter();
+      let emitted = false;
       emitter._eventListeners = {test: [function() {
         emitted = true;
       }]};
@@ -50,8 +50,8 @@ describe('EventEmitter', function() {
     });
 
     it('should call multiple listeners async', function(done) {
-      var emissions = 0;
-      var emitter = new EventEmitter();
+      let emissions = 0;
+      const emitter = new EventEmitter();
       function emissionCounter(next) {
         emissions++;
         next();
@@ -67,8 +67,8 @@ describe('EventEmitter', function() {
     });
 
     it('should call multiple listeners sync', function() {
-      var emissions = 0;
-      var emitter = new EventEmitter();
+      let emissions = 0;
+      const emitter = new EventEmitter();
       function emissionCounter() {
         emissions++;
       }
@@ -82,8 +82,11 @@ describe('EventEmitter', function() {
 
   describe('#listeners / #listenerCount', function() {
     it('should return all registered listeners', function() {
-      var emitter = new EventEmitter();
-      emitter._eventListeners = {test: [console.log, console.info], other: [console.warn]};
+      const emitter = new EventEmitter();
+      emitter._eventListeners = {
+        test: [console.log, console.info],
+        other: [console.warn]
+      };
       emitter._oneTimeListeners = {test: [console.log]};
 
       expect(EventEmitter.listenerCount(emitter, 'test')).to.equal(3);
@@ -95,7 +98,7 @@ describe('EventEmitter', function() {
 
   describe('#on', function() {
     it('should add a listener', function() {
-      var emitter = new EventEmitter();
+      const emitter = new EventEmitter();
       emitter.on('fake', console.log);
       emitter.onSync('fake', console.log);
       emitter.onAsync('fake', console.log);
@@ -103,7 +106,7 @@ describe('EventEmitter', function() {
     });
 
     it('should respect the maxListeners property', function(done) {
-      var emitter = new EventEmitter();
+      const emitter = new EventEmitter();
       emitter.setMaxListeners(2);
       emitter.on('maxListenersPassed', function() {
         done();
@@ -116,7 +119,7 @@ describe('EventEmitter', function() {
 
   describe('#once', function() {
     it('should add a listener', function() {
-      var emitter = new EventEmitter();
+      const emitter = new EventEmitter();
       emitter.once('fake', console.log);
       emitter.onceSync('fake', console.log);
       emitter.onceAsync('fake', console.log);
@@ -124,7 +127,7 @@ describe('EventEmitter', function() {
     });
 
     it('should respect the maxListeners property', function(done) {
-      var emitter = new EventEmitter();
+      const emitter = new EventEmitter();
       emitter.setMaxListeners(2);
       emitter.once('maxListenersPassed', function() {
         done();
@@ -137,7 +140,7 @@ describe('EventEmitter', function() {
 
   describe('#removeListener', function() {
     it('should remove a listener', function() {
-      var emitter = new EventEmitter();
+      const emitter = new EventEmitter();
       function handleBlargh() {
       }
       emitter.on('blargh', handleBlargh);
@@ -152,7 +155,7 @@ describe('EventEmitter', function() {
     });
 
     it('should be okay if no listeners exist to remove', function() {
-      var emitter = new EventEmitter();
+      const emitter = new EventEmitter();
       function handleBlargh() {
       }
       emitter.on('weagoo', console.log);
@@ -167,7 +170,7 @@ describe('EventEmitter', function() {
 
   describe('#removeAllListeners', function() {
     it('should remove all listeners', function() {
-      var emitter = new EventEmitter();
+      const emitter = new EventEmitter();
       function handleBlargh() {
       }
       emitter.on('blargh', handleBlargh);
