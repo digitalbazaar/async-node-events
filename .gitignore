@@ -1,4 +1,12 @@
-node_modules/
-.coverdata/
+*.log
+*.sw[nop]
+*~
+.coverdata
 .coverrun
-npm-debug.log
+.nyc_output
+.project
+.settings
+TAGS
+coverage
+node_modules
+reports
