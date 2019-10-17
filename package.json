@@ -1,12 +1,12 @@
 {
   "version": "1.0.1-0",
   "name": "async-node-events",
-  "description": "Asynchronous Node EventEmitter",
+  "description": "Asynchronous EventEmitter",
   "keywords": [
     "async",
     "events"
   ],
-  "homepage": "http://github.com/joshuafcole/async-node-events",
+  "homepage": "https://github.com/digitalbazaar/async-node-events#readme",
   "author": "David Ellis",
   "contributors": [
     {
