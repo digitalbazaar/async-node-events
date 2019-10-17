@@ -1,5 +1,10 @@
 # async-node-events ChangeLog
 
+### Changed
+- Update dependencies.
+- Switch from gulp to simple npm scripts and nyc.
+- Add eslint support and update style.
+
 ## 1.0.0 - 2018-05-10
 
 ### Changed
