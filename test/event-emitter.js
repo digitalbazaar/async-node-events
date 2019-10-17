@@ -1,5 +1,5 @@
-const expect = require('chai').expect;
-const EventEmitter = require('../lib/async-node-events');
+import {expect} from 'chai';
+import {EventEmitter} from '..';
 
 describe('EventEmitter', function() {
   describe('#constructor', function() {

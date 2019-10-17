@@ -25,8 +25,10 @@
     "type": "git",
     "url": "https://github.com/digitalbazaar/async-node-events"
   },
-  "main": "./lib/async-node-events",
+  "module": "./lib/main.js",
+  "main": "./lib/index.js",
   "dependencies": {
+    "esm": "^3.2.25",
     "is-async": "0.0.2"
   },
   "devDependencies": {
@@ -44,7 +46,7 @@
     "lint": "eslint 'lib/*.js' 'test/*.js'",
     "coverage": "nyc --reporter=lcov --reporter=text-summary npm test",
     "coverage-report": "nyc report",
-    "test": "mocha test"
+    "test": "mocha -r esm test"
   },
   "nyc": {
     "exclude": [

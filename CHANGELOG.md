@@ -4,6 +4,7 @@
 - Update dependencies.
 - Switch from gulp to simple npm scripts and nyc.
 - Add eslint support and update style.
+- Switch to ES modules using 'esm' for Node.js support.
 
 ## 1.0.0 - 2018-05-10
 
