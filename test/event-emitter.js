@@ -4,52 +4,43 @@ import {EventEmitter} from '..';
 describe('EventEmitter', function() {
   describe('#constructor', function() {
     it('should construct without error', function() {
-      new EventEmitter();
+      const emitter = new EventEmitter();
+      expect(emitter).to.not.be.undefined;
     });
   });
 
-  describe('#emit', function() {
-    it('should not error when emitting a nonexistent event async', function(
-      done) {
+  describe('#emit', () => {
+    it('should not error when emitting a nonexistent event async', async () => {
       const emitter = new EventEmitter();
-      emitter.emitAsync('doesNotExist', done);
+      const hadListener = await emitter.emit('doesNotExist');
+      expect(hadListener).to.be.false;
     });
 
-    it('should not error when emitting a nonexistent event sync', function() {
-      const emitter = new EventEmitter();
-      emitter.emitSync('doesNotExist');
-      emitter.emit('doesNotExist');
-    });
-
-    it('should call once listeners and remove them', function(done) {
+    it('should call once listeners and remove them', async () => {
       const emitter = new EventEmitter();
       let emitted = false;
       emitter._oneTimeListeners = {test: [function() {
         emitted = true;
       }]};
-      emitter.emit('test', function(err) {
-        expect(err).to.not.exist;
-        expect(emitted).to.be.true;
-        expect(emitter._oneTimeListeners).to.not.include.key('test');
-        done();
-      });
+      const hadListener = await emitter.emit('test');
+      expect(hadListener).to.be.true;
+      expect(emitted).to.be.true;
+      expect(emitter._oneTimeListeners).to.not.include.key('test');
     });
 
-    it('should call regular listeners without removing them', function(done) {
+    it('should call regular listeners without removing them', async () => {
       const emitter = new EventEmitter();
       let emitted = false;
       emitter._eventListeners = {test: [function() {
         emitted = true;
       }]};
-      emitter.emit('test', function(err) {
-        expect(err).to.not.exist;
-        expect(emitted).to.be.true;
-        expect(emitter._eventListeners).to.include.key('test');
-        done();
-      });
+      const hadListener = await emitter.emit('test');
+      expect(hadListener).to.be.true;
+      expect(emitted).to.be.true;
+      expect(emitter._eventListeners).to.include.key('test');
     });
 
-    it('should call multiple listeners async', function(done) {
+    it('should call multiple listeners async', async () => {
       let emissions = 0;
       const emitter = new EventEmitter();
       function emissionCounter(next) {
@@ -59,14 +50,12 @@ describe('EventEmitter', function() {
       emitter._eventListeners = {test: [emissionCounter, emissionCounter]};
       emitter._oneTimeListeners = {test: [emissionCounter]};
 
-      emitter.emit('test', function(err) {
-        expect(err).to.not.exist;
-        expect(emissions).to.equal(3);
-        done();
-      });
+      const hadListener = await emitter.emit('test');
+      expect(hadListener).to.be.true;
+      expect(emissions).to.equal(3);
     });
 
-    it('should call multiple listeners sync', function() {
+    it('should call multiple listeners sync', async () => {
       let emissions = 0;
       const emitter = new EventEmitter();
       function emissionCounter() {
@@ -75,13 +64,14 @@ describe('EventEmitter', function() {
       emitter._eventListeners = {test: [emissionCounter, emissionCounter]};
       emitter._oneTimeListeners = {test: [emissionCounter]};
 
-      emitter.emit('test');
+      const hadListener = await emitter.emit('test');
+      expect(hadListener).to.be.true;
       expect(emissions).to.equal(3);
     });
   });
 
-  describe('#listeners / #listenerCount', function() {
-    it('should return all registered listeners', function() {
+  describe('#listeners / #listenerCount', () => {
+    it('should return all registered listeners', async () => {
       const emitter = new EventEmitter();
       emitter._eventListeners = {
         test: [console.log, console.info],
@@ -96,8 +86,8 @@ describe('EventEmitter', function() {
     });
   });
 
-  describe('#on', function() {
-    it('should add a listener', function() {
+  describe('#on', () => {
+    it('should add a listener', async () => {
       const emitter = new EventEmitter();
       emitter.on('fake', console.log);
       emitter.onSync('fake', console.log);
@@ -105,20 +95,22 @@ describe('EventEmitter', function() {
       expect(emitter._eventListeners.fake).to.have.length(3);
     });
 
-    it('should respect the maxListeners property', function(done) {
+    it('should respect the maxListeners property', () => {
       const emitter = new EventEmitter();
+      let emissions = 0;
       emitter.setMaxListeners(2);
       emitter.on('maxListenersPassed', function() {
-        done();
+        emissions++;
       });
       emitter.on('fake', console.log);
       emitter.on('fake', console.log);
       emitter.on('fake', console.log);
+      expect(emissions).to.equal(1);
     });
   });
 
-  describe('#once', function() {
-    it('should add a listener', function() {
+  describe('#once', () => {
+    it('should add a listener', () => {
       const emitter = new EventEmitter();
       emitter.once('fake', console.log);
       emitter.onceSync('fake', console.log);
@@ -126,20 +118,22 @@ describe('EventEmitter', function() {
       expect(emitter._oneTimeListeners.fake).to.have.length(3);
     });
 
-    it('should respect the maxListeners property', function(done) {
+    it('should respect the maxListeners property', () => {
       const emitter = new EventEmitter();
+      let emissions = 0;
       emitter.setMaxListeners(2);
       emitter.once('maxListenersPassed', function() {
-        done();
+        emissions++;
       });
       emitter.once('fake', console.log);
       emitter.once('fake', console.log);
       emitter.once('fake', console.log);
+      expect(emissions).to.equal(1);
     });
   });
 
-  describe('#removeListener', function() {
-    it('should remove a listener', function() {
+  describe('#removeListener', () => {
+    it('should remove a listener', () => {
       const emitter = new EventEmitter();
       function handleBlargh() {
       }
@@ -154,7 +148,7 @@ describe('EventEmitter', function() {
       expect(emitter._eventListeners.weagoo).to.have.length(1);
     });
 
-    it('should be okay if no listeners exist to remove', function() {
+    it('should be okay if no listeners exist to remove', () => {
       const emitter = new EventEmitter();
       function handleBlargh() {
       }
@@ -165,11 +159,10 @@ describe('EventEmitter', function() {
       expect(emitter.listeners('blargh')).to.have.length(0);
       expect(emitter.listeners('weagoo')).to.have.length(1);
     });
-
   });
 
-  describe('#removeAllListeners', function() {
-    it('should remove all listeners', function() {
+  describe('#removeAllListeners', () => {
+    it('should remove all listeners', () => {
       const emitter = new EventEmitter();
       function handleBlargh() {
       }

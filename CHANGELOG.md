@@ -1,10 +1,23 @@
 # async-node-events ChangeLog
 
+## 2.0.0 - 2019-xx-xx
+
 ### Changed
+- **BREAKING**: Make `emit()` async function and resolve to `true`/`false` if
+  listeners were called rather than returning `this`.
 - Update dependencies.
 - Switch from gulp to simple npm scripts and nyc.
-- Add eslint support and update style.
 - Switch to ES modules using 'esm' for Node.js support.
+- Update test suite.
+- Modernize code.
+  - async/await
+  - arrow functions
+  - various new ES features
+
+### Added
+- Add eslint support and update style.
+- `off()` as alias for removeListener.
+- Instance `listenerCount()`.
 
 ## 1.0.0 - 2018-05-10
 
