@@ -24,9 +24,8 @@ The listener manipulation methods (``on``, ``off``, etc) are synchronous and
 use ``emitSync`` to emit ``newListener``, ``removeListener``, and
 ``maxListenersPassed``. Listeners for these events must be synchronous.
 
-All credit goes to @dfellis.
-
-Improvements and updates by Digital Bazaar.
+- Credit for the original project goes to @dfellis.
+- Improvements and updates by Digital Bazaar.
 
 ## Install
 
@@ -76,6 +75,7 @@ The primary differences between the `EventEmitter` and `async-node-events` are:
 ## License (MIT)
 
 Copyright (C) 2012-2013 by David Ellis
+Copyright (C) 2014-2019 Digital Bazaar
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
