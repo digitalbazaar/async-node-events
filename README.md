@@ -1,23 +1,32 @@
 # async-node-events
 
 An EventEmitter replacement that allows both asynchronous and synchronous
-emissions and handlers.  This is entirely based off of and almost entirely
+emissions and handlers. This is entirely based off of and almost entirely
 written by @dfellis in his excellent
 [async-cancelable-events](https://github.com/dfellis/async-cancelable-events)
-module. Even this README is primarily written by @dfellis.
+module. Even this README is primarily written by @dfellis. Recent updates are
+from Digital Bazaar.
 
-This version uses the idiomatic node callback continuation style. Namely, once
-an asynchronous function has completed, it calls a callback, passing the first
-parameter as an error (or `null`) and then optional parameters may follow.
-Passing an error back from a listener that executed asynchronously will
-terminate the listener chain (subsequent listeners will not receive the emitted
-event and any callback for the event emitter will receive the error). Events
-may also be canceled by passing `false` as the second parameter to a
-asynchronous listener's callback -- which is the analog to returning false from
-a synchronous listener. Both of these approaches will stop further event
-emission (to other listeners), but not raise an error.
+This version is primarily targeted at using Promises and async/await with
+``emit`` and listeners. Namely, the asynchronous ``emit`` will return a Promise
+which can be awaited upon. Listeners are run in series and their result is
+awaited upon. Throwing an error from a listener that executed asynchronously
+will terminate the listener chain (subsequent listeners will not receive the
+emitted event and the ``emit`` Promise will be rejected. Events may also be
+canceled by a listener resolving to or returning `false`. This will stop
+further event emission to other listeners and return `false` rather than
+`undefined`, but not raise an error.
+
+The synchronous ``emitSync`` variant acts like the asynchronous ``emit`` but
+only allows synchronous listeners.
+
+The listener manipulation methods (``on``, ``off``, etc) are synchronous and
+use ``emitSync`` to emit ``newListener``, ``removeListener``, and
+``maxListenersPassed``. Listeners for these events must be synchronous.
 
 All credit goes to @dfellis.
+
+Improvements and updates by Digital Bazaar.
 
 ## Install
 
@@ -28,44 +37,41 @@ npm install async-node-events
 ## Usage
 
 ```js
-var EventEmitter = require('async-node-events');
+var EventEmitter = require('async-node-events').EventEmitter;
 var util = require('util');
 
-function MyEmittingObject() {
-    EventEmitter.call(this);
+(async () => {
+  const myEmitter = new EventEmitter();
+  myEmitter.on('test', async (...) => {
     ...
+  });
+  await myEmitter.emit('test', ...);
+})();
+
+function MyEmittingObject() {
+  EventEmitter.call(this);
+  ...
 }
 
 util.inherits(MyEmittingObject, EventEmitter);
 ```
 
-The API is intented to be a mostly-drop-in replacement for Node.js'
-EventEmitter object, except with support for node-styled async callbacks.
+The API is intended to be a mostly-drop-in replacement for Node.js'
+`EventEmitter` object, except with support for asynchronous listeners.
 
-The primary differences between the EventEmitter and async-node-events are:
+The primary differences between the `EventEmitter` and `async-node-events` are:
 
-1. If the last argument passed into ``this.emit`` is a function, it is assumed
-   to be a callback that accepts accepts the typical (err, result) tuple.
-2. The ``.on`` and ``.once`` methods try to "guess" if the provided handler is
-   synchronous or asynchronous (based on its argument length), or can be
-   explicitly registered as synchronous or asynchronous with ``.onSync``,
-   ``.onAsync``, ``.onceSync``, ``.onceAsync``.
-3. Passing the maximum number of listeners allowed will fire off a
+1. Passing the maximum number of listeners allowed will fire off a
    ``maxListenersPassed`` event with the event name and listener count as
    arguments. The warning the official ``EventEmitter`` prints is simply a
    listener for ``async-node-events``, and can be disabled by running
    ``this.removeAllListeners('maxListenersPassed')`` just after the
    ``EventEmitter.call(this)`` listed above.
-4. The various method calls are chainable, so ``foo.on('bar', func1).on('baz',
-   func2)`` is valid.
-
-The primary difference between async-cancelable-events and async-node-events
-is:
-
-1. The parameters of asynchronous callbacks use the node idiom of
-   `callback(err:Error|Null, result:Any)` rather than
-   `callback(continue:Boolean)`. If `result:Any` is `false` then it will cancel
-   further event emission to other listeners.
+2. The various synchronous method calls are chainable, so ``foo.on('bar',
+   func1).on('baz', func2)`` is valid.
+3. ``emit`` and ``emitSync`` return `undefined` if the even was emitted to all
+   listeners and `false` when a listener caused cancellation. This differs from
+   returning an indication if there were listeners.
 
 ## License (MIT)
 
