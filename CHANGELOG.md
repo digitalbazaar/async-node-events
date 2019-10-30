@@ -5,6 +5,13 @@
 ### Changed
 - **BREAKING**: Make `emit()` async function and resolve to `true`/`false` if
   listeners were called rather than returning `this`.
+- **BREAKING**: Listeners called through sync functions (`on`, `off`, etc) will
+  all be called in a sync manner, and must not return a Promise.
+- **BREAKING**: ``emitSync`` is now like ``emit`` but only handles synchronous
+  listeners.
+- **BREAKING**: ``emit`` and ``emitSync`` return `false` when cancelled and
+  `true` if not cancelled. This differs from Node.js API that indicates if
+  there were listeners. Use `listenerCount` to check for listeners.
 - Update dependencies.
 - Switch from gulp to simple npm scripts and nyc.
 - Switch to ES modules using 'esm' for Node.js support.
@@ -13,11 +20,18 @@
   - async/await
   - arrow functions
   - various new ES features
+  - use Map
 
 ### Added
 - Add eslint support and update style.
 - `off()` as alias for removeListener.
 - Instance `listenerCount()`.
+
+### Removed
+- **BREAKING**: Listener manipulation API is now *always* synchronous. Remove
+  old explicit sync/async API.
+  - `onSync()` / `onceSync()` / `addListenerSync()`
+  - `onAsync()` / `onceAsync()` / `addListenerAsync()`
 
 ## 1.0.0 - 2018-05-10
 

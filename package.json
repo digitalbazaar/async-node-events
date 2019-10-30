@@ -29,7 +29,7 @@
   "main": "./lib/index.js",
   "dependencies": {
     "esm": "^3.2.25",
-    "is-async": "0.0.2"
+    "is-promise": "^2.1.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
