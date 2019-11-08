@@ -13,7 +13,7 @@ describe('EventEmitter', function() {
     it('should not error when emitting a nonexistent event async', async () => {
       const emitter = new EventEmitter();
       const finished = await emitter.emit('doesNotExist');
-      expect(finished).to.not.be.false;
+      expect(finished).to.be.undefined;
     });
 
     it('should call once listeners and remove them', async () => {
@@ -23,7 +23,7 @@ describe('EventEmitter', function() {
         emitted = true;
       });
       const finished = await emitter.emit('test');
-      expect(finished).to.not.be.false;
+      expect(finished).to.be.undefined;
       expect(emitted).to.be.true;
       expect(emitter.listeners('test').length).to.equal(0);
     });
@@ -35,7 +35,7 @@ describe('EventEmitter', function() {
         emitted = true;
       });
       const finished = await emitter.emit('test');
-      expect(finished).to.be.true;
+      expect(finished).to.be.undefined;
       expect(emitted).to.be.true;
       expect(emitter._eventListeners.has('test')).to.be.true;
     });
@@ -51,7 +51,7 @@ describe('EventEmitter', function() {
       emitter.once('test', emissionCounter);
 
       const finished = await emitter.emit('test');
-      expect(finished).to.be.true;
+      expect(finished).to.be.undefined;
       expect(emissions).to.equal(3);
     });
 
@@ -66,7 +66,7 @@ describe('EventEmitter', function() {
       emitter.once('test', emissionCounter);
 
       const finished = await emitter.emit('test');
-      expect(finished).to.be.true;
+      expect(finished).to.be.undefined;
       expect(emissions).to.equal(3);
     });
 
@@ -81,7 +81,7 @@ describe('EventEmitter', function() {
       emitter.once('toString', emissionCounter);
 
       const finished = await emitter.emit('toString');
-      expect(finished).to.be.true;
+      expect(finished).to.be.undefined;
       expect(emissions).to.equal(3);
     });
 
