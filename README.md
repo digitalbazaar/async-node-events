@@ -5,10 +5,10 @@
 
 An EventEmitter replacement that allows both asynchronous and synchronous
 emissions and handlers. This is entirely based off of and almost entirely
-written by @dfellis in his excellent
+written by [@dfellis] in his excellent
 [async-cancelable-events](https://github.com/dfellis/async-cancelable-events)
-module. Even this README is primarily written by @dfellis. Recent updates are
-from Digital Bazaar.
+module. Even this README is primarily written by [@dfellis]. Recent updates are
+from [Digital Bazaar].
 
 This version is primarily targeted at using Promises and async/await with
 ``emit`` and listeners. Namely, the asynchronous ``emit`` will return a Promise
@@ -99,5 +99,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
+[@dfellis]: https://github.com/dfellis
 [David Ellis]: https://github.com/dfellis
 [Digital Bazaar]: https://github.com/digitalbazaar
