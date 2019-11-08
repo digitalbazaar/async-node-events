@@ -3,6 +3,9 @@
 ## 2.0.0 - 2019-xx-xx
 
 ### Changed
+- **BREAKING**: `EventEmitter` is exported from module.
+  - For CommonJS use `const {EventEmitter} = require('async-node-events');`
+  - For ES Modules use `import {EventEmitter} from 'async-node-events';`
 - **BREAKING**: Make `emit()` async function and resolve to `true`/`false` if
   listeners were called rather than returning `this`.
 - **BREAKING**: Listeners called through sync functions (`on`, `off`, etc) will
