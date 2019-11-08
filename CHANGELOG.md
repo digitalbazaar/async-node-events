@@ -1,6 +1,6 @@
 # async-node-events ChangeLog
 
-## 2.0.0 - 2019-xx-xx
+## 2.0.0 - 2019-11-08
 
 ### Changed
 - **BREAKING**: `EventEmitter` is exported from module.
