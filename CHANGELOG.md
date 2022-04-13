@@ -1,6 +1,6 @@
 # async-node-events ChangeLog
 
-## 3.0.0 - 2022-04-xx
+## 3.0.0 - 2022-04-13
 
 ### Changed
 - **BREAKING**: Rename package to `@digitalbazaar/async-node-events`.
