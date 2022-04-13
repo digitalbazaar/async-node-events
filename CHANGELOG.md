@@ -3,6 +3,7 @@
 ## 3.0.0 - 2022-04-xx
 
 ### Changed
+- **BREAKING**: Rename package to `@digitalbazaar/async-node-events`.
 - **BREAKING**: Convert to module (ESM).
 - **BREAKING**: Require node 14.x.
 

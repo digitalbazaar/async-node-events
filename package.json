@@ -1,5 +1,5 @@
 {
-  "name": "async-node-events",
+  "name": "@digitalbazaar/async-node-events",
   "version": "2.0.1-0",
   "type": "module",
   "description": "Asynchronous EventEmitter",
