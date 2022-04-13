@@ -1,5 +1,11 @@
 # async-node-events ChangeLog
 
+## 3.0.0 - 2022-04-xx
+
+### Changed
+- **BREAKING**: Convert to module (ESM).
+- **BREAKING**: Require node 14.x.
+
 ## 2.0.0 - 2019-11-08
 
 ### Changed
