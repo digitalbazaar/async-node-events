@@ -34,6 +34,9 @@
     "url": "https://github.com/digitalbazaar/async-node-events"
   },
   "main": "./lib/index.js",
+  "files": [
+    "lib/**/*.js"
+  ],
   "dependencies": {
     "is-promise": "^4.0.0"
   },

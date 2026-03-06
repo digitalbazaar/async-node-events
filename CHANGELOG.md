@@ -1,5 +1,10 @@
 # async-node-events ChangeLog
 
+## 3.0.1 - 2026-xx-xx
+
+### Fixed
+- Add `package.json` `files` field.
+
 ## 3.0.0 - 2022-04-13
 
 ### Changed
