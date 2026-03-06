@@ -1,5 +1,5 @@
-import {expect} from 'chai';
 import {EventEmitter} from '../lib/index.js';
+import {expect} from 'chai';
 
 describe('EventEmitter', function() {
   describe('#constructor', function() {
