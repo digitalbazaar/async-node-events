@@ -1,4 +1,4 @@
-# async-node-events
+# @digitalbazaar/async-node-events
 
 [![NPM Version](https://img.shields.io/npm/v/async-node-events.svg?style=flat-square)](https://npm.im/async-node-devents)
 [![Build Status](https://img.shields.io/github/actions/workflow/status/digitalbazaar/bedrock/main.yml)](https://github.com/digitalbazaar/bedrock/actions/workflows/main.yml)
@@ -33,14 +33,14 @@ use ``emitSync`` to emit ``newListener``, ``removeListener``, and
 ## Install
 
 ```sh
-npm install async-node-events
+npm install @digitalbazaar/async-node-events
 ```
 
 ## Usage
 
 ```js
-var EventEmitter = require('async-node-events').EventEmitter;
-var util = require('util');
+import {EventEmitter} from '@digitalbazaar/async-node-events';
+const util = require('node:util');
 
 (async () => {
   const myEmitter = new EventEmitter();
@@ -61,7 +61,8 @@ util.inherits(MyEmittingObject, EventEmitter);
 The API is intended to be a mostly-drop-in replacement for Node.js'
 `EventEmitter` object, except with support for asynchronous listeners.
 
-The primary differences between the `EventEmitter` and `async-node-events` are:
+The primary differences between the `EventEmitter` and
+`@digitalbazaarasync-node-events` are:
 
 1. Passing the maximum number of listeners allowed will fire off a
    ``maxListenersPassed`` event with the event name and listener count as
