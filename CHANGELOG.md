@@ -1,6 +1,9 @@
 # async-node-events ChangeLog
 
-## 3.0.1 - 2026-xx-xx
+## 4.0.0 - 2026-xx-xx
+
+### Changed
+- **BREAKING**: Only support Node.js >=20.
 
 ### Fixed
 - Add `package.json` `files` field.
