@@ -4,6 +4,7 @@
 
 ### Changed
 - **BREAKING**: Only support Node.js >=20.
+- Update dev dependencies.
 
 ### Fixed
 - Add `package.json` `files` field.
