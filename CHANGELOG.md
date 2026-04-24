@@ -1,10 +1,13 @@
 # async-node-events ChangeLog
 
-## 4.0.0 - 2026-xx-xx
+## 3.1.0 - 2026-xx-xx
 
 ### Changed
-- **BREAKING**: Only support Node.js >=20.
 - Update dev dependencies.
+- **NOTE**: Update supported platforms.
+  - Test on Node.js >=20.
+  - Update `engines.node` to `>=20`.
+  - Update README requirements section.
 
 ### Fixed
 - Add `package.json` `files` field.
