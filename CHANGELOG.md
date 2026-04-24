@@ -1,6 +1,6 @@
 # async-node-events ChangeLog
 
-## 3.1.0 - 2026-xx-xx
+## 3.1.0 - 2026-04-24
 
 ### Changed
 - Update dev dependencies.
