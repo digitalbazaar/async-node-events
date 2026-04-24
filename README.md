@@ -32,6 +32,11 @@ use ``emitSync`` to emit ``newListener``, ``removeListener``, and
 
 ## Install
 
+This software requires and supports maintained recent versions of Node.js and
+browsers. Updates may remove support for older unmaintained platform versions.
+Please use dependency version lock files and testing to ensure compatibility
+with this software.
+
 ```sh
 npm install @digitalbazaar/async-node-events
 ```
@@ -40,7 +45,7 @@ npm install @digitalbazaar/async-node-events
 
 ```js
 import {EventEmitter} from '@digitalbazaar/async-node-events';
-const util = require('node:util');
+import {* as util} from 'node:util';
 
 (async () => {
   const myEmitter = new EventEmitter();
