@@ -1,7 +1,7 @@
 # @digitalbazaar/async-node-events
 
-[![NPM Version](https://img.shields.io/npm/v/async-node-events.svg?style=flat-square)](https://npm.im/async-node-devents)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/digitalbazaar/bedrock/main.yaml)](https://github.com/digitalbazaar/bedrock/actions/workflows/main.yaml)
+[![NPM Version](https://img.shields.io/npm/v/@digitalbazaar/async-node-events.svg)](https://npm.im/@digitalbazaar/async-node-events)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/digitalbazaar/async-node-events/main.yaml)](https://github.com/digitalbazaar/async-node-events/actions/workflows/main.yaml)
 
 An EventEmitter replacement that allows both asynchronous and synchronous
 emissions and handlers. This is entirely based off of and almost entirely
